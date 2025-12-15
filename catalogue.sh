@@ -8,6 +8,7 @@ LOGS_FOLDER="/var/log/shell-roboshop"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 MONGODB_HOST=mongodb.daws86.fun
+SCRIPT_DIR=$PWD
 
 mkdir -p $LOGS_FOLDER
 echo "script started executed at: $(date)" | tee -a $LOG_FILE
@@ -43,7 +44,7 @@ if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
     VALIDATE $? "Creating system user"
 else
-   echo -e "User already existed.. $Y SUCCESS $N"
+   echo -e "User already existed.. $Y SKIIPING $N"
 fi
 
 mkdir -p /app 
@@ -64,7 +65,7 @@ VALIDATE $? "Changing to app directory "
 npm install &>>$LOG_FILE
 VALIDATE $? "Install dependencies "
 
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "Copy systemctl service "
 
 systemctl daemon-reload
