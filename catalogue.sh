@@ -86,8 +86,8 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Install mongodb client "
 
 
-INDEX=$(mongosh mongodb.daws8s.help --quiet --eval "db.getMongo().getDBName().indexOf('catalogue')")
-if [ $INDEX -le 0]; then
+INDEX=$(mongosh mongodb.daws86s.help --quiet --eval "db.getMongo().getDBName().indexOf('catalogue')")
+if [ $INDEX -le 0 ]; then
       mongosh --host $MONGODB_HOST </app/db/master-data.js &>>$LOG_FILE
       VALIDATE $? "Load catalogue products "
 else
