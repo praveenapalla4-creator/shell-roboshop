@@ -18,25 +18,26 @@ do
         RECORD_NAME="$DOMAIN_NAME"
     fi
     echo "$instance : $IP"
-
-# aws route53 change-resource-record-sets \
-#  --hosted-zone-id  $ZONE_ID \
-#  --change-batch '
-#  {
-# 	"Comment":"Updating record set"
-#     ,"Changes": [{
-# 	"Action": "UPSERT",
-# 	"ResourceRecordSet": {
-# 	    "Name": "'$RECORD_NAME'",
-# 	    "Type": "A",
-# 	    "TTL": 1,
-# 	    "ResourceRecords": [{
-# 	        "Value": "'$IP'"
-# 	    }]
-# 	}
-# 	}]
-#     }
-#     '
+    echo "instanceid: $INSTANCE_ID"
+    
+    # aws route53 change-resource-record-sets \
+    #  --hosted-zone-id  $ZONE_ID \
+    #  --change-batch '
+    #  {
+	# "Comment":"Updating record set"
+    # ,"Changes": [{
+	# "Action": "UPSERT",
+	# "ResourceRecordSet": {
+	#     "Name": "'$RECORD_NAME'",
+	#     "Type": "A",
+	#     "TTL": 1,
+	#     "ResourceRecords": [{
+	#         "Value": "'$IP'"
+	#     }]
+	# }
+	# }]
+    # }
+    # '
     done
 	
 
