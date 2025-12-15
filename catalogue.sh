@@ -29,13 +29,13 @@ fi
 
 ######### NODEJS ############ 
 dnf module disable nodejs -y &>>$LOG_FILE
-VALIDTAE $? "Diableing Nodejs"
+VALIDATE $? "Diableing Nodejs"
 
 dnf module enable nodejs:20 -y &>>$LOG_FILE
-VALIDTAE $? "enabling  Nodejs 20"
+VALIDATE $? "enabling  Nodejs 20"
 
 dnf install nodejs -y &>>$LOG_FILE
-VALIDTAE $? "Installing Nodejs"
+VALIDATE $? "Installing Nodejs"
 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
 VALIDATE $? "Craeting  System User"
