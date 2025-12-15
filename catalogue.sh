@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
@@ -27,6 +27,7 @@ fi
 
 }
 
+######### NODEJS ############ 
 dnf module disable nodejs -y &>>$LOG_FILE
 VALIDTAE $? "Diableing Nodejs"
 
@@ -67,12 +68,12 @@ VALIDATE $? "enable catalogue "
 systemctl start catalogue
 VALIDATE $? "Creating app directory "
 
-
+############# MONGODB CLIENT ##########
 cp mongo.repo /etc/yum.repos.d/mongo.repo
-VALIDATE $? "Copu mongo repo "
+VALIDATE $? "Copy mongo repo "
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE
-VALIDATE $? "CInstall mongodb client "
+VALIDATE $? "Install mongodb client "
 
 mongosh --host $MONGODB_HOST </app/db/master-data.js &>>$LOG_FILE
 VALIDATE $? "Load catalogue products "
