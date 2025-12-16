@@ -41,6 +41,9 @@ else
    echo -e "User already existed.. $Y SKIIPING $N"
 fi
 
+rm -rf /app/*
+VALIDATE $? "Removing existing code"
+
 mkdir -p /app 
 VALIDATE $? "Creating app directory "
 
@@ -50,8 +53,7 @@ VALIDATE $? "Downloading payment applictaion "
 cd /app 
 VALIDATE $? "Changing to  app directory "
 
-rm -rf /app/*
-VALIDATE $? "Removing existing code"
+
 
 unzip /tmp/payment.zip &>>$LOG_FILE
 VALIDATE $? "UNzip catalogue "
@@ -59,7 +61,7 @@ VALIDATE $? "UNzip catalogue "
 cd /app 
 VALIDATE $? "Changing to app directory "
 
-pip3 install -r requirements.txt l &>>$LOG_FILE
+pip3 install -r requirements.txt  &>>$LOG_FILE
 VALIDATE $? "Install dependencies "
 
 cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service 
