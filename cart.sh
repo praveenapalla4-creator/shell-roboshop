@@ -44,6 +44,9 @@ else
    echo -e "User already existed.. $Y SKIIPING $N"
 fi
 
+rm -rf /app/*
+VALIDATE $? "Removing existing code"
+
 
 mkdir -p /app  &>>$LOG_FILE
 VALIDATE $? "creating a directory"
