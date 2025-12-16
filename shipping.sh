@@ -36,7 +36,8 @@ fi
 
 dnf install maven -y &>>$LOG_FILE
 VALIDATE $? "Installing maven "
-id roboshop &>>$LOG_FILE
+
+id roboshop 
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
     VALIDATE $? "Creating system user"
