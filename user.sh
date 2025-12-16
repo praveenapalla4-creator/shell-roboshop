@@ -28,19 +28,46 @@ fi
 
 }
 
-dnf module disable nodejs -y
-dnf module enable nodejs:20 -y
+dnf module disable nodejs -y &>>$LOG_FILE
+VALIDATE $? "Disable deafualt nodejs "
 
-dnf install nodejs -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE
+VALIDATE $? "Enable  nodejs 20 version "
 
+dnf install nodejs -y &>>$LOG_FILE
+VALIDATE $? "Installing nodejs"
+
+if [ $? -ne 0 ]; then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+    VALIDATE $? "Creating system user"
+else
+   echo -e "User already existed.. $Y SKIIPING $N"
+fi
 
-mkdir /app 
-curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
+rm -rf /app/*
+VALIDATE $? "Removing existing code"
+
+mkdir -p /app 
+
+curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>$LOG_FILE
+VALIDATE $? "Downloading catalogue applictaion "
+
 cd /app 
-unzip /tmp/user.zip
+VALIDATE $? "Changing to  app directory "
+
+unzip /tmp/user.zip &>>$LOG_FILE
+VALIDATE $? "unzip user file"
+
 cd /app 
-npm install 
-systemctl daemon-reload
-systemctl enable user 
+VALIDATE $? "Changing to app directory "
+
+cp $SCRIPT_DIR/user.service  /etc/systemd/system/user.service
+VALIDATE $? "Copy systemctl service "
+
+npm install &>>$LOG_FILE
+VALIDATE $? "Install nodejs "
+
+systemctl daemon-reload 
+systemctl enable user  &>>$LOG_FILE
+
 systemctl start user
