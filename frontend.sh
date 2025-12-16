@@ -60,7 +60,7 @@ unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? "unzipping frontend application "
 
 rm -rf /etc/nginx/nginx.conf
-cp $SCRIPT_DIR/nginx.con /etc/nginx/nginx.conf
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 
 systemctl restart nginx &>>$LOG_FILE
 VALIDATE $? "Restarting Nginx"
