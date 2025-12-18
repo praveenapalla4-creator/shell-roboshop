@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -euo pipefail
+# set -euo pipefail
 
-trap 'echo "there is an error in $LINENO, Command is: $BASH_COMMAND"' ERR
+# trap 'echo "there is an error in $LINENO, Command is: $BASH_COMMAND"' ERR
 
 USERID=$(id -u)
 R="\e[31m"
