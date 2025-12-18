@@ -66,7 +66,7 @@ VALIDATE $? "moving in to app directory "
 npm install &>>$LOG_FILE
 VALIDATE $? "Installing the modules "
 
-cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service &>>$LOG_FILE
+cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service 
 VALIDATE $? "copy systemctl  service "
 
 systemctl daemon-reload &>>$LOG_FILE
