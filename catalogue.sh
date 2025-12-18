@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# set -euo pipefail
+set -euo pipefail
 
-# trap 'echo "there is an error in $LINENO, Command is: $BASH_COMMAND"' ERR
+trap 'echo "there is an error in $LINENO, Command is: $BASH_COMMAND"' ERR
 
 USERID=$(id -u)
 R="\e[31m"
@@ -44,7 +44,6 @@ dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing Nodejs"
 
 id roboshop &>>$LOG_FILE
-VALIDATE $? "No such User"
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
     VALIDATE $? "Creating system user"
